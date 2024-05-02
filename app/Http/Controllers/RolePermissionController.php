@@ -8,6 +8,7 @@ use App\Http\Requests\CreateRoleRequest;
 use App\Http\Requests\CreatePermissionRequest;
 use App\Http\Requests\AssignPermissionToRoleRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 class RolePermissionController extends Controller
 {
@@ -26,7 +27,9 @@ class RolePermissionController extends Controller
     }
 
     public function assignPermissionToRole(AssignPermissionToRoleRequest $request): JsonResponse
-    {
+    {   
+        Auth::shouldUse('web'); // Встановлення гварда для операції
+
         $role = Role::findByName($request->role_name);
         $permission = Permission::findByName($request->permission_name);
 
