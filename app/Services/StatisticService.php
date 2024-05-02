@@ -4,10 +4,11 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Statistic;
+use Illuminate\Database\Eloquent\Collection;
 
 class StatisticService
 {
-    public function createStatistic($name, $notes)
+    public function createStatistic($name, $notes): Statistic
     {
         $statistic = new Statistic();
         $statistic->name = $name;
@@ -18,7 +19,7 @@ class StatisticService
         return $statistic;
     }
 
-    public function updateStatistic($name, $notes, Statistic $statistic)
+    public function updateStatistic($name, $notes, Statistic $statistic): Statistic
     {
         $statistic->name = $name;
         $statistic->notes = $notes;
@@ -27,7 +28,7 @@ class StatisticService
         return $statistic;
     }
 
-    public function getAllStatisticsByPermission(User $user)
+    public function getAllStatisticsByPermission(User $user): Collection
     {
         if ($user->can('viewAllStatistic')) {
             return Statistic::all();
