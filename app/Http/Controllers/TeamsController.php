@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AssignBuyerToTeamLeadRequest;
 use App\Services\TeamUserService;
+use Illuminate\Http\JsonResponse;
 
 class TeamsController extends Controller
 {
@@ -14,7 +15,7 @@ class TeamsController extends Controller
         $this->teamUserService = $teamUserService;
     }
 
-    public function assignBuyerToTeamLead(AssignBuyerToTeamLeadRequest $request)
+    public function assignBuyerToTeamLead(AssignBuyerToTeamLeadRequest $request): JsonResponse
     {
         $this->authorize('assign-buyer', TeamUser::class);
     

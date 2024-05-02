@@ -2,16 +2,15 @@
 
 namespace App\Policies;
 
-use App\Models\AppModelsTeamUser;
+use App\Models\TeamUser;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class TeamUserPolicy
 {
     /**
      * Determine whether the user can attach buyer to teamlead .
      */
-    public function assignBuyer(User $user, TeamUser $teamUser)
+    public function assignBuyer(User $user, TeamUser $teamUser): bool
     {
         // allow for admin or for teamlead to which linking buyer & check buyer role
         return $user->can('assignBuyer') || $user->id === $teamUser->teamlead_id

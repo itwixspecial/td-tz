@@ -6,17 +6,18 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\User;
 use App\Http\Requests\AttachRoleRequest;
 use Spatie\Permission\Models\Role;
+use Illuminate\Http\JsonResponse;
 
 class RoleUserController extends Controller
 {
     use AuthorizesRequests;
 
-    public function attachRoleToUser(AttachRoleRequest $request)
+    public function attachRoleToUser(AttachRoleRequest $request): JsonResponse
     {       
         $this->authorize('attach-role', User::class);
 
-        $userId = $request->input('user_id');
-        $roleId = $request->input('role_id');
+        $userId = $request->user_id;
+        $roleId = $request->role_id;
         $role = Role::findById($roleId, 'web');
 
         $user = User::findOrFail($userId);

@@ -4,26 +4,24 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Statistic;
-use Illuminate\Support\Facades\Auth;
-
 
 class StatisticService
 {
-    public function createStatistic($request)
+    public function createStatistic($name, $notes)
     {
         $statistic = new Statistic();
-        $statistic->name = $request->name;
-        $statistic->notes = $request->notes;
+        $statistic->name = $name;
+        $statistic->notes = $notes;
         $statistic->user_id = auth()->id();
         $statistic->save();
 
         return $statistic;
     }
 
-    public function updateStatistic($request, Statistic $statistic)
+    public function updateStatistic($name, $notes, Statistic $statistic)
     {
-        $statistic->name = $request->name;
-        $statistic->notes = $request->notes;
+        $statistic->name = $name;
+        $statistic->notes = $notes;
         $statistic->save();
     
         return $statistic;

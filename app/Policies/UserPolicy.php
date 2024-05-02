@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -13,9 +12,9 @@ class UserPolicy
     /**
      * перевірка на привʼязку ролей
      */
-    public function attachRole(User $user)
+    public function attachRole(User $user): bool
     {
-        return $user->hasAnyRole(['admin', 'teamlead']);
+        return $user->can('attachRole');
     }
 
     /**

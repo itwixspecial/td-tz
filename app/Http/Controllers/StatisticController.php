@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateStatisticRequest;
 use App\Models\Statistic;
 use App\Services\StatisticService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
 
 class StatisticController extends Controller
 {    
@@ -20,7 +20,7 @@ class StatisticController extends Controller
         $this->statisticService = $statisticService;
     }
 
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $user = $request->user(); // Отримуємо поточного користувача
 
@@ -29,22 +29,26 @@ class StatisticController extends Controller
         return response()->json($statistics, 200);
     }
 
-    public function store(CreateStatisticRequest $request)
+    public function store(CreateStatisticRequest $request): JsonResponse
     {
-        $statistic = $this->statisticService->createStatistic($request);
+        $name = $request->name;
+        $notes = $request->notes;
+        $statistic = $this->statisticService->createStatistic($name, $notes);
         return response()->json($statistic, 201);
     }
 
-    public function update(CreateStatisticRequest $request, Statistic $statistic)
+    public function update(CreateStatisticRequest $request, Statistic $statistic): JsonResponse
     {
         // перевірка чи може виконувати цю дію
         $this->authorize('update-statistic', $statistic);
 
-        $statistic = $this->statisticService->updateStatistic($request, $statistic);
+        $name = $request->name;
+        $notes = $request->notes;
+        $statistic = $this->statisticService->updateStatistic($name, $notes, $statistic);
         return response()->json($statistic, 200);
     }
 
-    public function destroy(Statistic $statistic)
+    public function destroy(Statistic $statistic): JsonResponse
     {
         $this->authorize('update-statistic', $statistic);
 
