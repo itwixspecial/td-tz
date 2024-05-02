@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 class TeamsController extends Controller
 {
-    protected $teamUserService;
+    protected TeamUserService $teamUserService;
 
     public function __construct(TeamUserService $teamUserService)
     {
