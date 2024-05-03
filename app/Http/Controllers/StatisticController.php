@@ -13,7 +13,7 @@ class StatisticController extends Controller
 {    
     use AuthorizesRequests;
 
-    protected $statisticService;
+    protected StatisticService $statisticService;
 
     public function __construct(StatisticService $statisticService)
     {
