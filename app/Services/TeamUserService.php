@@ -6,7 +6,7 @@ use App\Models\TeamUser;
 
 class TeamUserService
 {
-    public function assignBuyerToTeamLead($teamleadId, $buyerId): TeamUser
+    public function assignBuyerToTeamLead(int $teamleadId, int $buyerId): TeamUser
     {
         return TeamUser::create([
             'teamlead_id' => $teamleadId,

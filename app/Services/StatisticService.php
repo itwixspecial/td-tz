@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class StatisticService
 {
-    public function createStatistic($name, $notes): Statistic
+    public function createStatistic(string $name, string $notes): Statistic
     {
         $statistic = new Statistic();
         $statistic->name = $name;
@@ -19,7 +19,7 @@ class StatisticService
         return $statistic;
     }
 
-    public function updateStatistic($name, $notes, Statistic $statistic): Statistic
+    public function updateStatistic(string $name, string $notes, Statistic $statistic): Statistic
     {
         $statistic->name = $name;
         $statistic->notes = $notes;
