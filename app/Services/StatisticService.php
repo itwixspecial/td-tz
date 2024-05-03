@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class StatisticService
 {
-    public function createStatistic(string $name, string $notes): Statistic
+    public function createStatistic(string $name, ?string $notes): Statistic
     {
         $statistic = new Statistic();
         $statistic->name = $name;
+        $statistic->purchases = 0;
         $statistic->notes = $notes;
         $statistic->user_id = auth()->id();
         $statistic->save();
@@ -19,9 +20,10 @@ class StatisticService
         return $statistic;
     }
 
-    public function updateStatistic(string $name, string $notes, Statistic $statistic): Statistic
+    public function updateStatistic(string $name, int $purchases, string $notes, Statistic $statistic): Statistic
     {
         $statistic->name = $name;
+        $statistic->purchases = $purchases;
         $statistic->notes = $notes;
         $statistic->save();
     

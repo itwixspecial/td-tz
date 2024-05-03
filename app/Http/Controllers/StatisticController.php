@@ -43,8 +43,9 @@ class StatisticController extends Controller
         $this->authorize('update-statistic', $statistic);
 
         $name = $request->name;
+        $purchases = $request->purchases;
         $notes = $request->notes;
-        $statistic = $this->statisticService->updateStatistic($name, $notes, $statistic);
+        $statistic = $this->statisticService->updateStatistic($name, $purchases, $notes, $statistic);
         return response()->json($statistic, 200);
     }
 
